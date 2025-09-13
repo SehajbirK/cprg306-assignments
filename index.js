@@ -1,8 +1,8 @@
 "use strict";
 
-// sample data - expanded Star Wars characters with varied ages
+// Sample data
 const users = [
-  { id: 1, name: "Luke Skywalker" age: 23 },
+  { id: 1, name: "Luke Skywalker", age: 23 },
   { id: 2, name: "Darth Vader", age: 45 },
   { id: 3, name: "Princess Leia", age: 23 },
   { id: 4, name: "Obi-Wan Kenobi", age: 57 },
@@ -14,16 +14,76 @@ const users = [
   { id: 10, name: "Padmé Amidala", age: 27 },
 ];
 
-// broken test data for exercise 6
+// Exercise 1 & reusable function
+function renderList(array, elementId) {
+  const list = document.getElementById(elementId);
+  list.innerHTML = ""; // Clear existing content
+  array.forEach(item => {
+    if (!item.name) {
+      console.error("Missing name property", item);
+      return;
+    }
+    const li = document.createElement("li");
+    li.textContent = item.name;
+    list.appendChild(li);
+  });
+}
 
-// 1. Print out the names of each character in the console, then render them in the HTML list with id "names-list"
+// Exercise 4: Filter by age
+function renderByAge(array, ageThreshold, elementId) {
+  const filtered = array.filter(user => user.age < ageThreshold);
+  renderList(filtered, elementId);
+}
 
-// 2. Print out the names of characters whose age is less than 40 in the console, then render them in the HTML list with id "young-characters-list"
+// Exercise 5 & 6: Error handling version
+function renderListWithErrors(array, elementId, errorDivId) {
+  const list = document.getElementById(elementId);
+  const errorDiv = document.getElementById(errorDivId);
+  list.innerHTML = "";
+  errorDiv.innerHTML = "";
 
-// 3. Create a reusable function that takes any array and uses logic to render a list of character names in the HTML. Use this function to populate the list with id "function-list"
+  array.forEach(item => {
+    if (!item.name) {
+      console.error("Missing name property", item);
+      const errorMsg = document.createElement("p");
+      errorMsg.textContent = `Error: Missing name for id ${item.id}`;
+      errorDiv.appendChild(errorMsg);
+      return;
+    }
+    const li = document.createElement("li");
+    li.textContent = item.name;
+    list.appendChild(li);
+  });
+}
 
-// 4. Create a function that takes an array and an age threshold parameter. The function should only display characters whose age is below the given number. Render results in the list with id "age-filter-list"
+// ------------------ Run Exercises ------------------
 
-// 5. Add error handling to your functions that will log an error message using console.error() if any object doesn't have a "name" property. Display any error messages in the div with id "error-messages"
+// Exercise 1
+console.log("Exercise 1:");
+users.forEach(u => console.log(u.name));
+renderList(users, "names-list");
 
-// 6. Test your error handling by creating a second array that's intentionally broken (missing name properties) and passing it to your functions. Verify that your error handling works correctly and displays errors in the div with id "broken-array-errors"
+// Exercise 2
+console.log("Exercise 2:");
+const youngUsers = users.filter(u => u.age < 40);
+console.log(youngUsers.map(u => u.name));
+renderList(youngUsers, "young-characters-list");
+
+// Exercise 3
+console.log("Exercise 3:");
+renderList(users, "function-list");
+
+// Exercise 4
+console.log("Exercise 4:");
+renderByAge(users, 50, "age-filter-list");
+
+// Exercise 5 (already handled in renderListWithErrors)
+
+// Exercise 6
+const brokenUsers = [
+  { id: 1, age: 20 },
+  { id: 2, name: "Valid User", age: 35 },
+  { id: 3 }
+];
+console.log("Exercise 6:");
+renderListWithErrors(brokenUsers, "broken-array-list", "broken-array-errors");
