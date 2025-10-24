@@ -1,7 +1,9 @@
 export default function Item({ item }) {
   return (
-    <div>
-      {item.name} - {item.quantity} ({item.category})
-    </div>
+    <tr>
+      <td>{item.name}</td>
+      <td>{item.quantity}</td>
+      <td>{item.category}</td>
+    </tr>
   );
 }

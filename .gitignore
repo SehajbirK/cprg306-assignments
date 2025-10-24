@@ -1,12 +1,5 @@
-# Node modules
 node_modules/
-
-# Logs
-*.log
-
-# OS files
-.DS_Store
-
-# Optional Next.js build output
 .next/
 out/
+.DS_Store
+package-lock.json
