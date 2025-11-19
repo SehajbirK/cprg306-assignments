@@ -27,3 +27,131 @@ th, td {
 th {
   background-color: #f2f2f2;
 }
+/* Page Layout */
+.page {
+    display: flex;
+    gap: 40px;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+}
+
+.left-column {
+    width: 45%;
+}
+
+.right-column {
+    width: 55%;
+}
+
+/* Section Titles */
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Item Cards */
+.item-card {
+    border: 2px solid #e2e2e2;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.item-card:hover {
+    background: #f7f7f7;
+}
+
+/* Meal Cards */
+.meal-card {
+    border: 2px solid #e4e4e4;
+    padding: 10px;
+    border-radius: 12px;
+    background: white;
+    text-align: center;
+}
+
+.meal-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.meal-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+/* Sort buttons */
+.sort-buttons button {
+    margin-right: 10px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #f1f1f1;
+    border: solid 1px #ccc;
+    cursor: pointer;
+}
+
+.sort-buttons button:hover {
+    background: #e4e4e4;
+}
+
+/* Add Item Form */
+form {
+    border: 2px solid #e2e2e2;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-buttons button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    background: #dedede;
+}
+
+.quantity-buttons button:hover {
+    background: #cfcfcf;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 10px 0;
+    background: green;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #0e800e;
+}

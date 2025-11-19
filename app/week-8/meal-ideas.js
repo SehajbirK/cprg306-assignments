@@ -1,42 +1,38 @@
 "use client";
+
 import { useState, useEffect } from "react";
 
-export default function MealIdeas({ ingredient }) {
-  const [meals, setMeals] = useState([]);
+async function fetchMeals(ingredient) {
+    if (!ingredient) return [];
 
-  async function fetchMealIdeas(ingredient) {
-    try {
-      const response = await fetch(
+    const res = await fetch(
         `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
-      );
-      const data = await response.json();
-      return data.meals || [];
-    } catch (error) {
-      console.error("Error fetching meal ideas:", error);
-      return [];
-    }
-  }
-
-  async function loadMealIdeas() {
-    if (ingredient) {
-      const meals = await fetchMealIdeas(ingredient);
-      setMeals(meals);
-    }
-  }
-
-  useEffect(() => {
-    loadMealIdeas();
-  }, [ingredient]);
-
-  return (
-    <div>
-      <h2>Meal Ideas for {ingredient || "..."}</h2>
-      <ul>
-        {meals.map((meal) => (
-          <li key={meal.idMeal}>{meal.strMeal}</li>
-        ))}
-      </ul>
-    </div>
-  );
+    );
+    const data = await res.json();
+    return data.meals || [];
 }
 
+export default function MealIdeas({ ingredient }) {
+    const [meals, setMeals] = useState([]);
+
+    useEffect(() => {
+        fetchMeals(ingredient).then(setMeals);
+    }, [ingredient]);
+
+    return (
+        <div>
+            <h2>Meal Ideas</h2>
+
+            {!ingredient && <p>Select an item to see meal ideas.</p>}
+
+            <div className="meal-list">
+                {meals.map((meal) => (
+                    <div key={meal.idMeal} className="meal-card">
+                        <img src={meal.strMealThumb} />
+                        <p>{meal.strMeal}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}

@@ -1,89 +1,66 @@
 "use client";
+
 import { useState } from "react";
 
 export default function NewItem({ onAddItem }) {
-  const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [category, setCategory] = useState("");
+    const [name, setName] = useState("");
+    const [quantity, setQuantity] = useState(1);
+    const [category, setCategory] = useState("Produce");
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!name) return; // simple validation
+    function handleSubmit(e) {
+        e.preventDefault();
 
-    const newItem = {
-      id: Date.now(),
-      name: name + (quantity ? `, ${quantity}` : ""),
-      quantity,
-      category,
-    };
-    onAddItem(newItem);
+        const item = {
+            id: Date.now(),
+            name,
+            quantity,
+            category
+        };
 
-    // Reset fields
-    setName("");
-    setQuantity("");
-    setCategory("");
-  }
+        onAddItem(item);
 
-  return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        border: "1px solid #ccc",
-        padding: "15px",
-        borderRadius: "8px",
-        marginBottom: "20px",
-        maxWidth: "300px",
-      }}
-    >
-      <h3 style={{ marginBottom: "10px" }}>Add New Item</h3>
+        setName("");
+        setQuantity(1);
+        setCategory("Produce");
+    }
 
-      <div style={{ marginBottom: "10px" }}>
-        <label style={{ display: "block", marginBottom: "4px" }}>Item Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="e.g., Chicken Breast"
-          style={{ width: "100%", padding: "6px" }}
-        />
-      </div>
+    return (
+        <form onSubmit={handleSubmit}>
+            <h2>Item Name</h2>
+            <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
 
-      <div style={{ marginBottom: "10px" }}>
-        <label style={{ display: "block", marginBottom: "4px" }}>Quantity:</label>
-        <input
-          type="text"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-          placeholder="e.g., 1 kg"
-          style={{ width: "100%", padding: "6px" }}
-        />
-      </div>
+            <h3>Quantity (1–20)</h3>
 
-      <div style={{ marginBottom: "10px" }}>
-        <label style={{ display: "block", marginBottom: "4px" }}>Category:</label>
-        <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          placeholder="e.g., Meat, Vegetable"
-          style={{ width: "100%", padding: "6px" }}
-        />
-      </div>
+            <div className="quantity-box">
+                <span>Current: {quantity}</span>
 
-      <button
-        type="submit"
-        style={{
-          padding: "8px 12px",
-          backgroundColor: "#5A38FD",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-        }}
-      >
-        Add Item
-      </button>
-    </form>
-  );
+                <div className="quantity-buttons">
+                    <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                        −
+                    </button>
+                    <button type="button" onClick={() => setQuantity(Math.min(20, quantity + 1))}>
+                        +
+                    </button>
+                </div>
+            </div>
+
+            <h3>Category</h3>
+            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                <option>Produce</option>
+                <option>Bakery</option>
+                <option>Meat</option>
+                <option>Dairy</option>
+                <option>Household</option>
+                <option>Dry Goods</option>
+                <option>Canned Goods</option>
+            </select>
+
+            <button className="add-btn">Add Item</button>
+        </form>
+    );
 }
-

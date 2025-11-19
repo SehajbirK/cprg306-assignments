@@ -1,36 +1,40 @@
 "use client";
+
 import { useState } from "react";
 import NewItem from "./new-item";
 import ItemList from "./item-list";
 import MealIdeas from "./meal-ideas";
+import itemsData from "./items.json";
 
 export default function Page() {
-  const [items, setItems] = useState([]);
-  const [selectedItemName, setSelectedItemName] = useState("");
+    const [items, setItems] = useState(itemsData);
+    const [ingredient, setIngredient] = useState("");
 
-  function handleAddItem(newItem) {
-    setItems([...items, newItem]);
-  }
+    function clean(name) {
+        return name.split(",")[0].replace(/[^\w\s]/gi, "").trim();
+    }
 
-  function handleItemSelect(item) {
-    const cleanedName = item.name
-      .split(",")[0]                       // remove ", 1 kg" etc.
-      .replace(/[^\p{L}\p{N}\s]/gu, "")   // remove emojis
-      .trim();
-    setSelectedItemName(cleanedName);
-  }
+    function handleSelect(item) {
+        setIngredient(clean(item.name));
+    }
 
-  return (
-    <div style={{ display: "flex", gap: "20px" }}>
-      <div style={{ flex: 1 }}>
-        <NewItem onAddItem={handleAddItem} />
-        <ItemList items={items} onItemSelect={handleItemSelect} />
-      </div>
+    function handleAddItem(item) {
+        setItems([...items, item]);
+    }
 
-      <div style={{ flex: 1 }}>
-        <MealIdeas ingredient={selectedItemName} />
-      </div>
-    </div>
-  );
+    return (
+        <main className="page">
+            <div className="left-column">
+                <h1>Shopping List + Meal Ideas</h1>
+
+                <NewItem onAddItem={handleAddItem} />
+
+                <ItemList items={items} onItemSelect={handleSelect} />
+            </div>
+
+            <div className="right-column">
+                <MealIdeas ingredient={ingredient} />
+            </div>
+        </main>
+    );
 }
-

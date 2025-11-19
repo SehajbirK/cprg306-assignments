@@ -1,8 +1,9 @@
-export default function Item({ item, onSelect }) {
-  return (
-    <li onClick={() => onSelect(item)} style={{ cursor: "pointer" }}>
-      {item.name} ({item.category}) – {item.quantity}
-    </li>
-  );
+export default function Item({ name, quantity, category, onSelect }) {
+    return (
+        <li className="item-card" onClick={onSelect}>
+            <h3>{name}</h3>
+            <p>Quantity: {quantity}</p>
+            <p>Category: {category}</p>
+        </li>
+    );
 }
-
