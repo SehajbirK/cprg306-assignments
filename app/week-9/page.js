@@ -1,4 +1,6 @@
 "use client";
+
+import Link from "next/link";
 import { useUserAuth } from "../contexts/AuthContext";
 
 export default function LandingPage() {
@@ -10,8 +12,15 @@ export default function LandingPage() {
         <button onClick={gitHubSignIn}>Login with GitHub</button>
       ) : (
         <div>
-          <p>Welcome, {user.displayName}</p>
+          <p>
+            Welcome, {user.displayName} ({user.email})
+          </p>
+
           <button onClick={firebaseSignOut}>Logout</button>
+
+          <br /><br />
+
+          <Link href="/week-9/shopping-list">Go to Shopping List</Link>
         </div>
       )}
     </div>
