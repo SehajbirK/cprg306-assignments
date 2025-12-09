@@ -13,7 +13,7 @@ export default function LandingPage() {
       ) : (
         <div>
           <p>
-            Welcome, {user.displayName} ({user.email})
+            Welcome, {user.displayName} 
           </p>
 
           <button onClick={firebaseSignOut}>Logout</button>
