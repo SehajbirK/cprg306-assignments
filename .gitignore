@@ -1,5 +1,17 @@
+# Node
 node_modules/
+
+# Next.js
 .next/
 out/
+
+# Mac
 .DS_Store
+
+# Package
 package-lock.json
+
+# Environment files (DO NOT PUSH)
+.env
+.env.local
+.env.*
