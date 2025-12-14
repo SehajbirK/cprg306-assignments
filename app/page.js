@@ -15,6 +15,8 @@ export default function Home() {
         <li><Link className="text-blue-600 underline" href="/week-7">Week 7</Link></li>
         <li><Link className="text-blue-600 underline" href="/week-8">Week 8</Link></li>
         <li><Link className="text-blue-600 underline" href="/week-9">Week 9</Link></li>
+        <li><Link className="text-blue-600 underline" href="/week-10">Week 10</Link></li>
+        
       </ul>
     </main>
   );
