@@ -20,7 +20,7 @@ export default function LandingPage() {
 
           <br /><br />
 
-          <Link href="/week-10/Shopping-List">Go to Shopping List</Link>
+          <Link href="/week-10/shopping-list">Go to Shopping List</Link>
         </div>
       )}
     </div>
